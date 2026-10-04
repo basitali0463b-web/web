@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artisan Roastery & Cafe - Craft Specialty Coffee</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        espresso: '#2C1A1D',
+                        roast: '#3D2314',
+                        caramel: '#C68B59',
+                        terracotta: '#D97736',
+                        gold: '#D4AF37',
+                        cream: '#FAF6F0',
+                        warmgray: '#EFEBE4',
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-nav {
+            background: rgba(44, 26, 29, 0.92);
+            backdrop-filter: blur(10px);
+        }
+        .hero-bg {
+            background: linear-gradient(180deg, rgba(44, 26, 29, 0.75) 0%, rgba(44, 26, 29, 0.9) 100%), 
+                        url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+        }
+        .pattern-overlay {
+            background-image: radial-gradient(#C68B59 0.75px, transparent 0.75px);
+            background-size: 24px 24px;
+            opacity: 0.08;
+        }
+    </style>
+</head>
+<body class="bg-cream text-espresso font-sans antialiased selection:bg-caramel selection:text-white">
+
+    <!-- Sticky Navbar -->
+    <header class="sticky top-0 z-50 glass-nav border-b border-caramel/20 text-cream transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="#home" class="flex items-center space-x-3 group">
+                    <div class="w-10 h-10 rounded-full bg-caramel/20 border border-gold/40 flex items-center justify-center text-gold group-hover:scale-105 transition-transform">
+                        <i class="fa-solid fa-mug-hot text-lg"></i>
+                    </div>
+                    <div>
+                        <span class="font-serif text-xl sm:text-2xl font-bold tracking-wide text-cream block">ARTISAN</span>
+                        <span class="text-[10px] tracking-widest text-caramel uppercase block -mt-1 font-semibold">Roastery & Cafe</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-8 text-sm font-medium tracking-wide">
+                    <a href="#home" class="hover:text-gold transition-colors py-1 border-b-2 border-transparent hover:border-gold">Home</a>
+                    <a href="#about" class="hover:text-gold transition-colors py-1 border-b-2 border-transparent hover:border-gold">About & CEO</a>
+                    <a href="#menu" class="hover:text-gold transition-colors py-1 border-b-2 border-transparent hover:border-gold">Menu</a>
+                    <a href="#team" class="hover:text-gold transition-colors py-1 border-b-2 border-transparent hover:border-gold">Team</a>
+                    <a href="#location" class="hover:text-gold transition-colors py-1 border-b-2 border-transparent hover:border-gold">Location</a>
+                </nav>
+
+                <!-- Action Button -->
+                <div class="hidden sm:flex items-center space-x-4">
+                    <button onclick="toggleModal()" class="bg-caramel hover:bg-terracotta text-white font-medium px-5 py-2.5 rounded-full text-sm transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                        <i class="fa-regular fa-calendar-check mr-2"></i>Book a Table
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-cream hover:text-gold focus:outline-none p-2">
+                    <i class="fa-solid fa-bars text-2xl" id="menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden bg-espresso/98 border-b border-caramel/20 px-4 pt-2 pb-6 space-y-3">
+            <a href="#home" class="mobile-link block px-3 py-2 rounded-lg text-base font-medium hover:bg-caramel/20 hover:text-gold">Home</a>
+            <a href="#about" class="mobile-link block px-3 py-2 rounded-lg text-base font-medium hover:bg-caramel/20 hover:text-gold">About & CEO</a>
+            <a href="#menu" class="mobile-link block px-3 py-2 rounded-lg text-base font-medium hover:bg-caramel/20 hover:text-gold">Menu</a>
+            <a href="#team" class="mobile-link block px-3 py-2 rounded-lg text-base font-medium hover:bg-caramel/20 hover:text-gold">Team</a>
+            <a href="#location" class="mobile-link block px-3 py-2 rounded-lg text-base font-medium hover:bg-caramel/20 hover:text-gold">Location</a>
+            <div class="pt-2">
+                <button onclick="toggleModal()" class="w-full bg-caramel hover:bg-terracotta text-white font-medium px-4 py-2.5 rounded-full text-sm transition-all">
+                    Book a Table
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative hero-bg min-h-[90vh] flex items-center justify-center text-center px-4 py-20 text-cream">
+        <div class="absolute inset-0 pattern-overlay pointer-events-none"></div>
+        <div class="max-w-4xl mx-auto z-10 space-y-6">
+            <div class="inline-flex items-center space-x-2 bg-caramel/30 backdrop-blur-md px-4 py-1.5 rounded-full border border-gold/30 text-gold text-xs sm:text-sm font-semibold tracking-wider uppercase">
+                <i class="fa-solid fa-seedling text-xs"></i>
+                <span>Ethically Sourced • Master Roasted</span>
+            </div>
+            
+            <h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-tight">
+                Craft Coffee, <br class="hidden sm:inline"/>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold via-caramel to-terracotta">Brewed to Perfection</span>
+            </h1>
+
+            <p class="text-base sm:text-xl text-warmgray/90 max-w-2xl mx-auto font-light leading-relaxed">
+                Welcome to Artisan Roastery & Cafe. Experience meticulously selected single-origin beans, hand-crafted espresso, and an atmosphere designed for conversation and comfort.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+                <a href="#menu" class="w-full sm:w-auto bg-caramel hover:bg-terracotta text-white font-semibold px-8 py-3.5 rounded-full text-base transition-all shadow-lg hover:shadow-caramel/30 transform hover:-translate-y-0.5">
+                    Explore Our Menu
+                </a>
+                <a href="#location" class="w-full sm:w-auto border-2 border-cream/40 hover:border-gold hover:text-gold text-cream font-semibold px-8 py-3.5 rounded-full text-base transition-all backdrop-blur-sm">
+                    Visit Us Today
+                </a>
+            </div>
+
+            <!-- Key Highlight Badges -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-12 text-left max-w-3xl mx-auto border-t border-cream/10 mt-12">
+                <div class="flex items-center space-x-3">
+                    <i class="fa-solid fa-award text-gold text-2xl"></i>
+                    <div>
+                        <div class="text-sm font-bold text-white">Award Winning</div>
+                        <div class="text-xs text-warmgray/70">Top Roaster 2025</div>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <i class="fa-solid fa-leaf text-gold text-2xl"></i>
+                    <div>
+                        <div class="text-sm font-bold text-white">100% Organic</div>
+                        <div class="text-xs text-warmgray/70">Fair Trade Beans</div>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <i class="fa-solid fa-wifi text-gold text-2xl"></i>
+                    <div>
+                        <div class="text-sm font-bold text-white">Free High-Speed Wi-Fi</div>
+                        <div class="text-xs text-warmgray/70">Cozy Workspaces</div>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <i class="fa-solid fa-bread-slice text-gold text-2xl"></i>
+                    <div>
+                        <div class="text-sm font-bold text-white">Fresh Daily</div>
+                        <div class="text-xs text-warmgray/70">Artisan Pastries</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About & CEO Intro Section -->
+    <section id="about" class="py-20 bg-warmgray/40 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-terracotta text-sm font-semibold uppercase tracking-widest block mb-2">Our Story & Heritage</span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-espresso">Passion for the Perfect Cup</h2>
+                <div class="w-16 h-1 bg-caramel mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <!-- CEO Feature Box -->
+            <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-caramel/10 grid grid-cols-1 lg:grid-cols-12 gap-0">
+                <!-- CEO Image Column -->
+                <div class="lg:col-span-5 relative min-h-[350px] lg:min-h-full">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80" 
+                         alt="Elena Vance CEO" 
+                         class="w-full h-full object-cover object-center absolute inset-0"
+                         onerror="this.src='https://placehold.co/600x800/3D2314/FAF6F0?text=CEO+Portrait'">
+                    <div class="absolute inset-0 bg-gradient-to-t from-espresso/80 via-transparent to-transparent lg:hidden"></div>
+                    <div class="absolute bottom-4 left-4 right-4 text-white lg:hidden">
+                        <span class="text-xs font-semibold uppercase text-gold tracking-wider">Founder & CEO</span>
+                        <h3 class="font-serif text-2xl font-bold">Elena Vance</h3>
+                    </div>
+                </div>
+
+                <!-- CEO Message Column -->
+                <div class="lg:col-span-7 p-8 sm:p-12 lg:p-16 flex flex-col justify-center space-y-6">
+                    <div class="hidden lg:block">
+                        <span class="text-xs font-bold uppercase tracking-widest text-terracotta bg-terracotta/10 px-3 py-1 rounded-full">Founder & CEO Message</span>
+                    </div>
+
+                    <h3 class="font-serif text-2xl sm:text-4xl font-bold text-espresso leading-snug">
+                        "We don't just serve coffee; we cultivate moments of mindfulness and connection."
+                    </h3>
+
+                    <p class="text-gray-600 leading-relaxed font-normal">
+                        Founded in 2018, Artisan Roastery began with a simple belief: coffee should be an experience, not a commodity. After traveling through smallholder farms in Ethiopia, Colombia, and Guatemala, I saw the dedication behind every bean. 
+                    </p>
+
+                    <p class="text-gray-600 leading-relaxed font-normal">
+                        Today, our roastery bridges the gap between dedicated coffee farmers and your morning cup. Every batch is micro-roasted in-house to unlock distinct flavor profiles, served alongside fresh pastries baked every morning by our artisan chefs.
+                    </p>
+
+                    <!-- CEO Signature & Info -->
+                    <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                        <div>
+                            <h4 class="font-serif text-xl font-bold text-espresso">Elena Vance</h4>
+                            <p class="text-sm text-caramel font-medium">Founder & CEO, Q-Grader Certified</p>
+                        </div>
+                        <div class="font-serif italic text-2xl text-caramel/60 font-semibold select-none">
+                            E. Vance
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-20 bg-cream">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-terracotta text-sm font-semibold uppercase tracking-widest block mb-2">Curated Menu</span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-espresso">Crafted with Precision</h2>
+                <p class="text-gray-600 mt-3 text-base">Select a category below to explore our seasonal coffee offerings and baked goods.</p>
+                <div class="w-16 h-1 bg-caramel mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <!-- Category Tabs -->
+            <div class="flex flex-wrap justify-center gap-2 sm:gap-4 mb-12" id="menu-tabs">
+                <button onclick="switchTab('espresso')" id="tab-espresso" class="menu-tab-btn active px-6 py-3 rounded-full text-sm font-semibold transition-all bg-espresso text-gold shadow-md">
+                    <i class="fa-solid fa-mug-saucer mr-2"></i>Espresso & Coffee
+                </button>
+                <button onclick="switchTab('brews')" id="tab-brews" class="menu-tab-btn px-6 py-3 rounded-full text-sm font-semibold transition-all bg-white text-espresso hover:bg-warmgray">
+                    <i class="fa-solid fa-filter mr-2"></i>Specialty Brews
+                </button>
+                <button onclick="switchTab('drinks')" id="tab-drinks" class="menu-tab-btn px-6 py-3 rounded-full text-sm font-semibold transition-all bg-white text-espresso hover:bg-warmgray">
+                    <i class="fa-solid fa-glass-water mr-2"></i>Tea & Cold Drinks
+                </button>
+                <button onclick="switchTab('pastries')" id="tab-pastries" class="menu-tab-btn px-6 py-3 rounded-full text-sm font-semibold transition-all bg-white text-espresso hover:bg-warmgray">
+                    <i class="fa-solid fa-cookie-bite mr-2"></i>Fresh Pastries
+                </button>
+            </div>
+
+            <!-- Menu Content Grid -->
+            <div id="menu-container" class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+                <!-- Items populated dynamically by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="py-20 bg-warmgray/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-terracotta text-sm font-semibold uppercase tracking-widest block mb-2">Our Experts</span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-espresso">Meet Our Artisans</h2>
+                <p class="text-gray-600 mt-3 text-base">The passionate team of roasters, baristas, and chefs behind your daily cup.</p>
+                <div class="w-16 h-1 bg-caramel mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Team Member 1 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-caramel/10 group">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80" 
+                             alt="Marcus Chen" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                             onerror="this.src='https://placehold.co/400x500/3D2314/FAF6F0?text=Marcus'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-espresso/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <div class="text-cream text-xs">
+                                "Coffee roasting is equal parts science and soul."
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-terracotta uppercase tracking-wider block mb-1">Head Master Roaster</span>
+                        <h3 class="font-serif text-xl font-bold text-espresso">Marcus Chen</h3>
+                        <p class="text-sm text-gray-500 mt-2">12 years of experience developing signature blend profiles and sourcing raw green beans globally.</p>
+                    </div>
+                </div>
+
+                <!-- Team Member 2 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-caramel/10 group">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80" 
+                             alt="Sophia Rodriguez" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                             onerror="this.src='https://placehold.co/400x500/3D2314/FAF6F0?text=Sophia'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-espresso/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <div class="text-cream text-xs">
+                                "Every espresso shot tells a story of origin."
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-terracotta uppercase tracking-wider block mb-1">Lead Barista</span>
+                        <h3 class="font-serif text-xl font-bold text-espresso">Sophia Rodriguez</h3>
+                        <p class="text-sm text-gray-500 mt-2">National Latte Art Champion with an unbeatable eye for texture and extraction quality.</p>
+                    </div>
+                </div>
+
+                <!-- Team Member 3 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-caramel/10 group">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80" 
+                             alt="Julian Mercier" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                             onerror="this.src='https://placehold.co/400x500/3D2314/FAF6F0?text=Julian'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-espresso/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <div class="text-cream text-xs">
+                                "Flaky layers and rich butter make mornings better."
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-terracotta uppercase tracking-wider block mb-1">Head Pastry Chef</span>
+                        <h3 class="font-serif text-xl font-bold text-espresso">Julian Mercier</h3>
+                        <p class="text-sm text-gray-500 mt-2">French-trained pastry specialist creating daily fresh croissants, tarts, and sourdough pairings.</p>
+                    </div>
+                </div>
+
+                <!-- Team Member 4 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-caramel/10 group">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80" 
+                             alt="Aaliyah Patel" 
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                             onerror="this.src='https://placehold.co/400x500/3D2314/FAF6F0?text=Aaliyah'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-espresso/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <div class="text-cream text-xs">
+                                "Creating a space where community happens."
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-terracotta uppercase tracking-wider block mb-1">Community Manager</span>
+                        <h3 class="font-serif text-xl font-bold text-espresso">Aaliyah Patel</h3>
+                        <p class="text-sm text-gray-500 mt-2">Oversees cafe hospitality, local art exhibitions, community workshops, and tasting events.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location & Info Section -->
+    <section id="location" class="py-20 bg-cream">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-terracotta text-sm font-semibold uppercase tracking-widest block mb-2">Visit Us</span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-espresso">Location & Hours</h2>
+                <div class="w-16 h-1 bg-caramel mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                <!-- Info Cards -->
+                <div class="lg:col-span-5 space-y-6 flex flex-col justify-between">
+                    <!-- Hours Box -->
+                    <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-md border border-caramel/10">
+                        <div class="flex items-center space-x-3 mb-4 text-espresso">
+                            <div class="w-10 h-10 rounded-full bg-caramel/10 flex items-center justify-center text-caramel">
+                                <i class="fa-regular fa-clock text-xl"></i>
+                            </div>
+                            <h3 class="font-serif text-xl font-bold">Opening Hours</h3>
+                        </div>
+                        <ul class="space-y-3 text-sm">
+                            <li class="flex justify-between border-b border-gray-100 pb-2">
+                                <span class="text-gray-600 font-medium">Monday - Friday</span>
+                                <span class="font-semibold text-espresso">07:00 AM - 08:00 PM</span>
+                            </li>
+                            <li class="flex justify-between border-b border-gray-100 pb-2">
+                                <span class="text-gray-600 font-medium">Saturday</span>
+                                <span class="font-semibold text-espresso">08:00 AM - 09:00 PM</span>
+                            </li>
+                            <li class="flex justify-between">
+                                <span class="text-gray-600 font-medium">Sunday</span>
+                                <span class="font-semibold text-espresso">08:00 AM - 07:00 PM</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Address Box -->
+                    <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-md border border-caramel/10">
+                        <div class="flex items-center space-x-3 mb-4 text-espresso">
+                            <div class="w-10 h-10 rounded-full bg-caramel/10 flex items-center justify-center text-caramel">
+                                <i class="fa-solid fa-location-dot text-xl"></i>
+                            </div>
+                            <h3 class="font-serif text-xl font-bold">Address & Contact</h3>
+                        </div>
+                        <div class="space-y-3 text-sm text-gray-600">
+                            <p class="flex items-start">
+                                <i class="fa-solid fa-map-pin mt-1 mr-3 text-caramel"></i>
+                                <span>452 Grand Avenue, Specialty Coffee Quarter, Downtown, CA 90210</span>
+                            </p>
+                            <p class="flex items-center">
+                                <i class="fa-solid fa-phone mr-3 text-caramel"></i>
+                                <span>+1 (555) 234-8901</span>
+                            </p>
+                            <p class="flex items-center">
+                                <i class="fa-solid fa-envelope mr-3 text-caramel"></i>
+                                <span>hello@artisanroastery.com</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Amenities Box -->
+                    <div class="bg-espresso text-cream p-6 rounded-2xl shadow-md">
+                        <h4 class="font-serif text-lg font-bold text-gold mb-3">Cafe Amenities</h4>
+                        <div class="grid grid-cols-2 gap-3 text-xs text-warmgray">
+                            <div class="flex items-center space-x-2">
+                                <i class="fa-solid fa-square-parking text-gold"></i>
+                                <span>Free Onsite Parking</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <i class="fa-solid fa-wifi text-gold"></i>
+                                <span>Fiber High-Speed Wi-Fi</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <i class="fa-solid fa-paw text-gold"></i>
+                                <span>Pet Friendly Patio</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <i class="fa-solid fa-plug text-gold"></i>
+                                <span>Power Outlets</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive/Visual Map Mockup -->
+                <div class="lg:col-span-7 bg-warmgray rounded-2xl overflow-hidden shadow-md border border-caramel/20 relative min-h-[350px] flex items-center justify-center">
+                    <!-- Map Background Imagery -->
+                    <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=1200&q=80" 
+                         alt="Map Preview" 
+                         class="w-full h-full object-cover filter contrast-125 opacity-70 absolute inset-0">
+                    <div class="absolute inset-0 bg-espresso/40"></div>
+                    
+                    <!-- Map Overlay Pin -->
+                    <div class="relative z-10 text-center p-6 bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl max-w-sm border border-caramel/30 m-4">
+                        <div class="w-12 h-12 rounded-full bg-caramel text-white flex items-center justify-center mx-auto mb-3 animate-bounce shadow-lg">
+                            <i class="fa-solid fa-mug-hot text-xl"></i>
+                        </div>
+                        <h4 class="font-serif text-xl font-bold text-espresso">Artisan Roastery</h4>
+                        <p class="text-xs text-gray-500 mt-1">452 Grand Avenue, Downtown</p>
+                        <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="mt-4 inline-block bg-espresso hover:bg-roast text-gold text-xs font-semibold px-4 py-2 rounded-full transition-colors">
+                            <i class="fa-solid fa-diamond-turn-right mr-1"></i> Get Directions
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Modal -->
+    <div id="booking-modal" class="fixed inset-0 z-50 bg-espresso/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative border border-caramel/20 transform transition-all">
+            <!-- Close Button -->
+            <button onclick="toggleModal()" class="absolute top-5 right-5 text-gray-400 hover:text-espresso p-2">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-caramel/10 text-caramel rounded-full flex items-center justify-center mx-auto mb-2">
+                    <i class="fa-regular fa-calendar-check text-2xl"></i>
+                </div>
+                <h3 class="font-serif text-2xl font-bold text-espresso">Book a Table</h3>
+                <p class="text-xs text-gray-500">Reserve a cozy spot for coffee meetings or relaxation.</p>
+            </div>
+
+            <form id="booking-form" onsubmit="handleBooking(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-espresso uppercase mb-1">Full Name</label>
+                    <input type="text" required placeholder="John Doe" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-caramel text-sm">
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-espresso uppercase mb-1">Date</label>
+                        <input type="date" required class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-caramel text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-espresso uppercase mb-1">Time</label>
+                        <select required class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-caramel text-sm">
+                            <option value="">Select Time</option>
+                            <option>08:00 AM</option>
+                            <option>10:00 AM</option>
+                            <option>01:00 PM</option>
+                            <option>04:00 PM</option>
+                            <option>06:00 PM</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-espresso uppercase mb-1">Guests</label>
+                    <select required class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-caramel text-sm">
+                        <option value="1">1 Person</option>
+                        <option value="2">2 People</option>
+                        <option value="4">4 People</option>
+                        <option value="6">6+ Group</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-espresso uppercase mb-1">Special Requests (Optional)</label>
+                    <textarea rows="2" placeholder="Window seat, high chair, etc." class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-caramel text-sm"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-caramel hover:bg-terracotta text-white font-semibold py-3 rounded-xl transition-all shadow-md text-sm mt-2">
+                    Confirm Reservation
+                </button>
+            </form>
+
+            <div id="booking-success" class="hidden text-center py-8 space-y-3">
+                <i class="fa-solid fa-circle-check text-green-500 text-5xl"></i>
+                <h4 class="font-serif text-xl font-bold text-espresso">Reservation Request Received!</h4>
+                <p class="text-xs text-gray-500">We will send a confirmation SMS and email shortly. See you soon!</p>
+                <button onclick="toggleModal()" class="mt-4 bg-espresso text-cream text-xs px-6 py-2.5 rounded-full">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="bg-espresso text-cream pt-16 pb-8 border-t border-caramel/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+                <!-- Brand Info -->
+                <div class="space-y-4">
+                    <a href="#home" class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-full bg-caramel/20 border border-gold/40 flex items-center justify-center text-gold">
+                            <i class="fa-solid fa-mug-hot text-lg"></i>
+                        </div>
+                        <span class="font-serif text-2xl font-bold tracking-wide text-cream">ARTISAN</span>
+                    </a>
+                    <p class="text-xs text-warmgray/70 leading-relaxed">
+                        Dedicated to the art of coffee roasting and brewing. Sourced sustainably, served with love in the heart of Downtown.
+                    </p>
+                    <div class="flex space-x-3 pt-2">
+                        <a href="#" class="w-8 h-8 rounded-full bg-caramel/20 text-gold flex items-center justify-center hover:bg-caramel hover:text-white transition-colors"><i class="fa-brands fa-instagram text-sm"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-caramel/20 text-gold flex items-center justify-center hover:bg-caramel hover:text-white transition-colors"><i class="fa-brands fa-facebook-f text-sm"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-caramel/20 text-gold flex items-center justify-center hover:bg-caramel hover:text-white transition-colors"><i class="fa-brands fa-x-twitter text-sm"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-serif text-lg font-bold text-gold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-xs text-warmgray/80">
+                        <li><a href="#home" class="hover:text-gold transition-colors">Home</a></li>
+                        <li><a href="#about" class="hover:text-gold transition-colors">Our Story & Founder</a></li>
+                        <li><a href="#menu" class="hover:text-gold transition-colors">Full Menu & Dietary Info</a></li>
+                        <li><a href="#team" class="hover:text-gold transition-colors">Meet the Team</a></li>
+                        <li><a href="#location" class="hover:text-gold transition-colors">Location & Hours</a></li>
+                    </ul>
+                </div>
+
+                <!-- Offerings -->
+                <div>
+                    <h4 class="font-serif text-lg font-bold text-gold mb-4">Specialties</h4>
+                    <ul class="space-y-2 text-xs text-warmgray/80">
+                        <li>Single-Origin Pour Overs</li>
+                        <li>Signature House Blends</li>
+                        <li>Fresh Cold Brew Nitro</li>
+                        <li>Artisan French Pastries</li>
+                        <li>Whole Bean Subscriptions</li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div>
+                    <h4 class="font-serif text-lg font-bold text-gold mb-4">Newsletter</h4>
+                    <p class="text-xs text-warmgray/70 mb-3">Subscribe to receive roasting updates, secret menu alerts, and event invites.</p>
+                    <form onsubmit="event.preventDefault(); alert('Thank you for subscribing!');" class="space-y-2">
+                        <input type="email" required placeholder="Enter your email" class="w-full px-3 py-2 text-xs bg-roast border border-caramel/30 rounded-lg text-cream placeholder-gray-400 focus:outline-none focus:border-gold">
+                        <button type="submit" class="w-full bg-caramel hover:bg-terracotta text-white font-semibold py-2 rounded-lg text-xs transition-colors">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="border-t border-caramel/10 pt-8 text-center text-xs text-warmgray/50 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+                <p>&copy; 2026 Artisan Roastery & Cafe. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-gold">Privacy Policy</a>
+                    <a href="#" class="hover:text-gold">Terms of Service</a>
+                    <a href="#" class="hover:text-gold">Accessibility</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu Data
+        const menuData = {
+            espresso: [
+                { name: "Single Origin Espresso", desc: "Double shot of rich Ethiopian Yirgacheffe with floral and citrus notes.", price: "$4.25", tag: "Vegan", icon: "fa-mug-hot" },
+                { name: "Artisan Cappuccino", desc: "Equal parts espresso, steamed milk, and velvety foam with cocoa dusting.", price: "$5.50", tag: "Organic", icon: "fa-mug-saucer" },
+                { name: "Salted Caramel Latte", desc: "House-made sea salt caramel, espresso, and creamy steamed oat milk.", price: "$6.25", tag: "Popular", icon: "fa-mug-hot" },
+                { name: "Flat White", desc: "Micro-foamed milk poured over two ristretto shots for smooth bold flavor.", price: "$5.25", tag: "", icon: "fa-mug-saucer" }
+            ],
+            brews: [
+                { name: "Pourover (V60 / Chemex)", desc: "Meticulously pour-over brew showcasing delicate single-origin notes.", price: "$6.50", tag: "Handcrafted", icon: "fa-filter" },
+                { name: "Nitro Cold Brew", desc: "Slow-steeped cold brew infused with nitrogen for a silky stout-like head.", price: "$6.00", tag: "Cold Refreshing", icon: "fa-glass-water" },
+                { name: "Kyoto Style Cold Drip", desc: "Slow drip brewing process over 12 hours for deep complex chocolate notes.", price: "$7.00", tag: "Limited", icon: "fa-flask" },
+                { name: "Aeropress Reserve", desc: "Full-bodied extraction with zero sediment highlighting fruit acidity.", price: "$5.75", tag: "", icon: "fa-filter" }
+            ],
+            drinks: [
+                { name: "Ceremonial Matcha Latte", desc: "Uji ceremonial grade matcha whisked with oat milk and agave nectar.", price: "$6.50", tag: "Superfood", icon: "fa-leaf" },
+                { name: "Spiced Chai Tea Latte", desc: "In-house brewed black tea with cardamom, cinnamon, ginger, and honey.", price: "$5.75", tag: "Warm Spiced", icon: "fa-mug-hot" },
+                { name: "Hibiscus Berry Iced Tea", desc: "Refreshing herbal blend of wild hibiscus, rosehips, and citrus zest.", price: "$5.00", tag: "Vegan", icon: "fa-glass-water" },
+                { name: "Golden Turmeric Milk", desc: "Anti-inflammatory turmeric, black pepper, cinnamon, and warm almond milk.", price: "$5.50", tag: "GF", icon: "fa-seedling" }
+            ],
+            pastries: [
+                { name: "Butter Croissant", desc: "Flaky 81-layer classic French croissant baked fresh every morning.", price: "$4.50", tag: "Fresh Daily", icon: "fa-bread-slice" },
+                { name: "Pistachio Raspberry Tart", desc: "Crushed pistachio cream filled shortbread tart with fresh raspberries.", price: "$6.75", tag: "Chef Special", icon: "fa-cookie-bite" },
+                { name: "Almond Cardamom Slice", desc: "Fragrant spiced cake layered with toasted almond flakes.", price: "$5.25", tag: "GF Available", icon: "fa-cake-candles" },
+                { name: "Avocado & Sourdough Toast", desc: "Thick sourdough, mashed avocado, poached egg, chili flakes, and microgreens.", price: "$11.00", tag: "Breakfast", icon: "fa-utensils" }
+            ]
+        };
+
+        // Render Menu Items
+        function renderMenu(category) {
+            const container = document.getElementById('menu-container');
+            const items = menuData[category] || [];
+            
+            container.innerHTML = items.map(item => `
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-caramel/10 flex items-start justify-between space-x-4 hover:shadow-md transition-shadow">
+                    <div class="flex-1">
+                        <div class="flex items-center space-x-2">
+                            <i class="fa-solid ${item.icon} text-caramel text-sm"></i>
+                            <h3 class="font-serif text-lg font-bold text-espresso">${item.name}</h3>
+                            ${item.tag ? `<span class="bg-caramel/10 text-caramel text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">${item.tag}</span>` : ''}
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2 leading-relaxed">${item.desc}</p>
+                    </div>
+                    <span class="font-serif font-bold text-caramel text-lg">${item.price}</span>
+                </div>
+            `).join('');
+        }
+
+        // Switch Menu Tab
+        function switchTab(category) {
+            document.querySelectorAll('.menu-tab-btn').forEach(btn => {
+                btn.classList.remove('bg-espresso', 'text-gold', 'shadow-md');
+                btn.classList.add('bg-white', 'text-espresso');
+            });
+
+            const activeBtn = document.getElementById(`tab-${category}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-white', 'text-espresso');
+                activeBtn.classList.add('bg-espresso', 'text-gold', 'shadow-md');
+            }
+
+            renderMenu(category);
+        }
+
+        // Toggle Reservation Modal
+        function toggleModal() {
+            const modal = document.getElementById('booking-modal');
+            const form = document.getElementById('booking-form');
+            const success = document.getElementById('booking-success');
+            
+            modal.classList.toggle('hidden');
+            if (modal.classList.contains('hidden')) {
+                // Reset form states on close
+                setTimeout(() => {
+                    form.classList.remove('hidden');
+                    success.classList.add('hidden');
+                    form.reset();
+                }, 300);
+            }
+        }
+
+        // Handle Booking Form Submit
+        function handleBooking(e) {
+            e.preventDefault();
+            document.getElementById('booking-form').classList.add('hidden');
+            document.getElementById('booking-success').classList.remove('hidden');
+        }
+
+        // Mobile Navigation Toggle
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            if (mobileMenu.classList.contains('hidden')) {
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars');
+            } else {
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-xmark');
+            }
+        });
+
+        // Close mobile drawer on link click
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars');
+            });
+        });
+
+        // Initialize with default menu category
+        window.onload = function() {
+            renderMenu('espresso');
+        };
+    </script>
+</body>
+</html>
